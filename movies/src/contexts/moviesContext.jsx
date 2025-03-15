@@ -28,7 +28,7 @@ const MoviesContextProvider = (props) => {
   const addReview = (movie, review) => {
     setMyReviews({ ...myReviews, [movie.id]: review })
   };
-  console.log(myReviews);
+  // console.log(myReviews);
 
   const addToPlaylist = (movie) => {
     let newPlaylists = [];
@@ -40,7 +40,7 @@ const MoviesContextProvider = (props) => {
     }
     setPlaylists(newPlaylists)
   };
-  console.log(playlists);
+  // console.log(playlists);
 
   return (
     <MoviesContext.Provider

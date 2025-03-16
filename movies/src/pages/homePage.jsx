@@ -7,29 +7,36 @@ import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
 
 const HomePage = (props) => {
 
-  const { data, error, isPending, isError  } = useQuery({
-    queryKey: ['discover'],
+  const { data, error, isPending, isError } = useQuery({
+    queryKey: ['home'],
     queryFn: getMovies,
   })
-  
+
   if (isPending) {
     return <Spinner />
   }
 
   if (isError) {
     return <h1>{error.message}</h1>
-  }  
-  
+  }
+
   const movies = data.results;
+
+  const title = (
+    <>
+      Web App Development 2 <br /> Movies App
+    </>
+  );
+
 
   return (
     <PageTemplate
-      title="Discover Movies"
+      title={title}
       movies={movies}
       action={(movie) => {
         return <AddToFavoritesIcon movie={movie} />
       }}
     />
-);
+  );
 };
 export default HomePage;

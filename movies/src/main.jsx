@@ -11,6 +11,7 @@ import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import MoviesContextProvider from "./contexts/moviesContext";
 import AddMovieReviewPage from './pages/addMovieReviewPage'
+import CssBaseline from '@mui/material/CssBaseline'; // Updates the body and html element to provide better page wide defaults (margins in browsers removed)
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,6 +27,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
+      <CssBaseline />
         <SiteHeader />
         <MoviesContextProvider>
           <Routes>

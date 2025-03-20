@@ -32,11 +32,10 @@ const FavoriteMoviesPage = () => {
     return q.data
   });
 
-  const toDo = () => true;
-
   return (
     <PageTemplate
       title="Favorite Movies"
+      searchPrompt="Favourite Movies..."
       movies={movies}
       action={(movie) => {
         return (

@@ -3,6 +3,7 @@ import { getGenres } from "../../api/tmdb-api";
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '../spinner';
 import Container from '@mui/material/Container';
+import img from '../../images/pexels-dziana-hasanbekava-5480827.jpg';
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
@@ -51,47 +52,59 @@ export default function heroBanner(props) {
         <>
             <Container sx={
                 {
-                    backgroundColor: "red",
-                    justifyContent: "space-around",
+                    backgroundImage: `url(${img})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundColor: "lightBlue",
                     paddingTop: 1,
-                    marginBottom: 1.5,
+                    paddingBottom: 1,
+                    marginBottom: 2,
                     textAlign: "center",
+                    minWidth: "100%",
                 }
             }>
 
-                <h1>{props.title}</h1>
+                <h1 style={{ color: "white", textShadow: "2px 4px 4px rgb(46 91 173 / 0.6)" }}>{props.title}</h1>
+                <Container sx={{
+                    paddingBottom: 3,
+                }}>
+                    <TextField
+                        sx={{
+                            ...formControl,
+                            minWidth: "50%",
+                            borderRadius: 10
+                        }}
+                        id="filled-search"
+                        label={`Search ${props.searchPrompt}`}
+                        type="search"
+                        variant="filled"
+                        value={props.titleFilter}
+                        onChange={handleTextChange}
+                    />
 
-                <TextField
-                    sx={{ ...formControl,
-                        minWidth: "50%",
-                     }}
-                    id="filled-search"
-                    label="Search field"
-                    type="search"
-                    variant="filled"
-                    value={props.titleFilter}
-                    onChange={handleTextChange}
-                />
-                <FormControl sx={{ ...formControl, minWidth: "25%"}}>
+                    <FormControl sx={{
+                        minWidth: "25%"
+                    }}>
+                        <InputLabel id="genre-label" sx={{ color: "white", paddingLeft: 4 }}>Filter By Genre</InputLabel>
+                        <Select
+                            sx={{ ...formControl, borderRadius: 10 }}
+                            labelId="genre-label"
+                            id="genre-select"
+                            defaultValue=""
+                            value={props.genreFilter}
+                            onChange={handleGenreChange}
+                        >
 
-                <InputLabel id="genre-label">Genre</InputLabel>
-                    <Select
-                        labelId="genre-label"
-                        id="genre-select"
-                        defaultValue=""
-                        value={props.genreFilter}
-                        onChange={handleGenreChange}
-                    >
-
-                        {genres.map((genre) => {
-                            return (
-                                <MenuItem key={genre.id} value={genre.id}>
-                                    {genre.name}
-                                </MenuItem>
-                            );
-                        })}
-                    </Select>
-                </FormControl>
+                            {genres.map((genre) => {
+                                return (
+                                    <MenuItem key={genre.id} value={genre.id}>
+                                        {genre.name}
+                                    </MenuItem>
+                                );
+                            })}
+                        </Select>
+                    </FormControl>
+                </Container>
             </Container>
         </>
     );

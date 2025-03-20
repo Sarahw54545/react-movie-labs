@@ -5,7 +5,7 @@ import FilterCard from "../filterMoviesCard";
 import MovieList from "../movieList";
 import Grid from "@mui/material/Grid2";
 
-function MovieListPageTemplate({ movies, title, action }) {
+function MovieListPageTemplate({ movies, title, action, searchPrompt }) {
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const genreId = Number(genreFilter);
@@ -28,6 +28,7 @@ function MovieListPageTemplate({ movies, title, action }) {
       <Grid size={12}>
         <HeroBanner
           title={title}
+          searchPrompt={searchPrompt}
           onUserInput={handleChange}
           titleFilter={nameFilter}
           genreFilter={genreFilter} />

@@ -25,6 +25,7 @@ const UpcomingMoviesPage = (props) => {
   return (
     <PageTemplate
       title="Upcoming Movies"
+      searchPrompt="Upcoming Movies..."
       movies={movies}
       action={(movie) => {
         return <PlaylistAddIcon movie={movie} />

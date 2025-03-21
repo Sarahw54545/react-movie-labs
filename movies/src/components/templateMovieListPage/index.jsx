@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-// import Header from "../headerMovieList";
 import HeroBanner from "../heroBanner";
-import FilterCard from "../filterMoviesCard";
 import MovieList from "../movieList";
 import Grid from "@mui/material/Grid2";
+// import Header from "../headerMovieList";
+// import FilterCard from "../filterMoviesCard";          - No Longer Used (Replaced by Hero Banner)
 
 function MovieListPageTemplate({ movies, title, action, searchPrompt }) {
   const [nameFilter, setNameFilter] = useState("");
@@ -34,8 +34,8 @@ function MovieListPageTemplate({ movies, title, action, searchPrompt }) {
           genreFilter={genreFilter} />
         {/* <Header title={title} /> */}
       </Grid>
-      <Grid container sx={{ flex: "1 1 500px" }}>
-        <Grid
+      
+        {/* <Grid                        - No Longer Used - Replaced by Hero Banner
           key="find"
           size={{ xs: 12, sm: 6, md: 4, lg: 3, xl: 2 }}
           sx={{ padding: "20px" }}
@@ -45,9 +45,11 @@ function MovieListPageTemplate({ movies, title, action, searchPrompt }) {
             titleFilter={nameFilter}
             genreFilter={genreFilter}
           />
-        </Grid>
-        <MovieList action={action} movies={displayedMovies}></MovieList>
-      </Grid>
+          
+        </Grid> */}
+      {/* </Grid> */}
+
+      <MovieList action={action} movies={displayedMovies}></MovieList>
     </Grid>
   );
 }

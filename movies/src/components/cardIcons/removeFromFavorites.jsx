@@ -11,7 +11,7 @@ const RemoveFromFavoritesIcon = ({ movie }) => {
     context.removeFromFavorites(movie);
   };
   return (
-    <IconButton
+    <IconButton sx={{marginRight: 1}}
       aria-label="remove from favorites"
       onClick={handleRemoveFromFavorites}
     >

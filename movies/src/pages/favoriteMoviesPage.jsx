@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import PageTemplate from "../components/templateMovieListPage";
+import UserPageTemplate from "../components/userSpecMovieListPageTemplate";
 import { MoviesContext } from "../contexts/moviesContext";
 import { useQueries } from "@tanstack/react-query";
 import { getMovie } from "../api/tmdb-api";
@@ -33,7 +33,7 @@ const FavoriteMoviesPage = () => {
   });
 
   return (
-    <PageTemplate
+    <UserPageTemplate
       title="Favorite Movies"
       searchPrompt="Favourite Movies..."
       movies={movies}

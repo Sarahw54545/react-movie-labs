@@ -10,7 +10,7 @@ const WriteReviewIcon = ({ movie }) => {
           movieId: movie.id,
       }}
     >
-      <RateReviewIcon color="primary" fontSize="large" />
+      <RateReviewIcon sx={{marginRight: 2, marginTop: 1}} color="primary" fontSize="large" />
     </Link>
   );
 };

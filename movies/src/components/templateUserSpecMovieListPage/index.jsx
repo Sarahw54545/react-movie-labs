@@ -1,20 +1,19 @@
 import React, { useState, useContext } from "react";
 import HeroBanner from "../heroBanner";
 import MovieList from "../movieList";
-import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid2";
 import { MoviesContext } from "../../contexts/moviesContext";
-import { Link } from "react-router";
-import Button from "@mui/material/Button";
+import EmptyPrompt from "../emptyPrompt"
 
 
 
-function ActionedMovieListPageTemplate({ movies, title, action, searchPrompt }) {
+function ActionedMovieListPageTemplate({ movies, title, action, searchPrompt, isEmpty, emptyPrompt, buttonPrompt, link }) {
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const genreId = Number(genreFilter);
 
-  const { favorites: favouritesExist } = useContext(MoviesContext);
+  // const { favorites: favouritesExist } = useContext(MoviesContext);
+  // const { watchlist: watchlistExists } = useContext(MoviesContext);
 
   let displayedMovies = movies
     .filter((m) => {
@@ -40,9 +39,8 @@ function ActionedMovieListPageTemplate({ movies, title, action, searchPrompt }) 
           genreFilter={genreFilter} />
       </Grid>
 
-
-      {favouritesExist == 0
-        ? <Container sx={{textAlign: "center"}}>
+      {/* {favouritesExist == 0
+        ? <Container sx={{ textAlign: "center" }}>
           <h2>Currently No Favourited Movies....</h2>
           <Link to={`/`}>
             <Button variant="contained" size="medium" color="primary">
@@ -53,6 +51,25 @@ function ActionedMovieListPageTemplate({ movies, title, action, searchPrompt }) 
 
         : <MovieList action={action} movies={displayedMovies}></MovieList>
       }
+
+
+      {watchlistExists == 0
+        ? <Container sx={{ textAlign: "center" }}>
+          <h2>Currently No Movies on Watchlist....</h2>
+          <Link to={`/movies/upcoming`}>
+            <Button variant="contained" size="medium" color="primary">
+              Add Some Movies From Here
+            </Button>
+          </Link>
+        </Container>
+
+        : <MovieList action={action} movies={displayedMovies}></MovieList>
+      } */}
+
+      {isEmpty === true
+      ? <EmptyPrompt emptyPrompt={emptyPrompt} buttonPrompt={buttonPrompt} link={link}></EmptyPrompt>
+    : <MovieList action={action} movies={displayedMovies}></MovieList>
+    }
     </Grid >
   );
 }

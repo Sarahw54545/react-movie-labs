@@ -4,14 +4,13 @@ import { MoviesContext } from "../contexts/moviesContext";
 import { useQueries } from "@tanstack/react-query";
 import { getMovie } from "../api/tmdb-api";
 import Spinner from '../components/spinner'
-import RemoveFromFavorites from "../components/cardIcons/removeFromFavorites";
-import WriteReview from "../components/cardIcons/writeReview";
+import RemoveFromWatchlist from "../components/cardIcons/removeFromWatchlist";
 
-const FavoriteMoviesPage = () => {
-  const {favorites: movieIds } = useContext(MoviesContext);
+const WatchlistsPage = () => {
+  const { watchlist: movieIds } = useContext(MoviesContext);
 
   // Create an array of queries and run in parallel.
-  const favoriteMovieQueries = useQueries({
+  const watchlistMovieQueries = useQueries({
     queries: movieIds.map((movieId) => {
       return {
         queryKey: ['movie', { id: movieId }],
@@ -19,42 +18,42 @@ const FavoriteMoviesPage = () => {
       }
     })
   });
-  
+
   // Check if any of the parallel queries is still loading.
-  const isPending = favoriteMovieQueries.find((m) => m.isPending === true);
+  const isPending = watchlistMovieQueries.find((m) => m.isPending === true);
 
   if (isPending) {
     return <Spinner />;
   }
 
-  const movies = favoriteMovieQueries.map((q) => {
+  const movies = watchlistMovieQueries.map((q) => {
     q.data.genre_ids = q.data.genres.map(g => g.id)
     return q.data
   });
 
   const isEmpty = movieIds.length == 0
-  ? true
-  : false
+    ? true
+    : false
+
 
   return (
     <UserPageTemplate
-      title="Favorite Movies"
-      searchPrompt="Favourite Movies..."
+      title="Movies Added to Watchlist"
+      searchPrompt="Watchlist Movies..."
       movies={movies}
       action={(movie) => {
         return (
           <>
-            <RemoveFromFavorites movie={movie} />
-            <WriteReview movie={movie} />
+            <RemoveFromWatchlist movie={movie} />
           </>
         );
       }}
       isEmpty={isEmpty}
-      emptyPrompt="Currently No Favourited Movies..."
-      buttonPrompt="Back to Home"
-      link="/"
+      emptyPrompt="Currently No Movies on Watchlist..."
+      buttonPrompt="Add Some Movies From Here"
+      link="/movies/upcoming"
     />
   );
 };
 
-export default FavoriteMoviesPage;
+export default WatchlistsPage;

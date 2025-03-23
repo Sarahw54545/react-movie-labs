@@ -16,7 +16,7 @@ import { Link } from "react-router";
 import { MoviesContext } from "../../contexts/moviesContext";
 
 export default function MovieCard({ movie, action }) {
-  const { favorites, addToFavorites } = useContext(MoviesContext);
+  const { favorites, watchlist} = useContext(MoviesContext);
 
   if (favorites.find((id) => id === movie.id)) {
     movie.favorite = true;
@@ -24,74 +24,18 @@ export default function MovieCard({ movie, action }) {
     movie.favorite = false
   }
 
-  const handleAddToFavorite = (e) => {
-    e.preventDefault();
-    addToFavorites(movie);
-  };
+  if (watchlist.find((id) => id === movie.id)) {
+    movie.watchlist = true;
+  } else {
+    movie.watchlist = false
+  }
 
   return (
-    // <Card>
-    //   <CardHeader
-    //     avatar={
-    //       movie.favorite ? (
-    //         <Avatar sx={{ backgroundColor: 'red' }}>
-    //           <FavoriteIcon />
-    //         </Avatar>
-    //       ) : null
-    //     }
-    //     title={
-    //       <Typography variant="h5" component="p">
-    //         {movie.title}
-    //       </Typography>
-    //     }
-    //   />
-
-    //   <CardMedia
-    //     sx={{ height: 500 }}
-    //     image={
-    //       movie.poster_path
-    //         ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-    //         : img
-    //     }
-    //     alt={`Cover Poster for ${movie.title}`}
-    //   />
-
-    //   <CardContent>
-    //     <Grid container>
-    //       <Grid size={{ xs: 6 }}>
-    //         <Typography variant="h6" component="p">
-    //           <CalendarIcon fontSize="small" />
-    //           {movie.release_date}
-    //         </Typography>
-    //       </Grid>
-
-    //       <Grid size={{ xs: 6 }}>
-    //         <Typography variant="h6" component="p">
-    //           <StarRateIcon fontSize="small" />
-    //           {"  "} {movie.vote_average}{" "}
-    //         </Typography>
-    //       </Grid>
-    //     </Grid>
-    //   </CardContent>
-
-    //   <CardActions disableSpacing>
-
-    //     {action(movie)}
-
-    //     <Link to={`/movies/${movie.id}`}>
-    //       <Button variant="outlined" size="medium" color="primary">
-    //         More Info ...
-    //       </Button>
-    //     </Link>
-
-    //   </CardActions>
-    // </Card>
-
-    <Card sx={{ borderRadius: 5}}>
+    <Card sx={{ borderRadius: 5 }}>
 
       <CardMedia
         component="img"
-        sx={{objectFit: "contain"}}
+        sx={{ objectFit: "contain" }}
         image={
           movie.poster_path
             ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
@@ -102,11 +46,13 @@ export default function MovieCard({ movie, action }) {
 
       <CardHeader sx={{ paddingBottom: 0 }}
         avatar={
-          movie.favorite ? (
-            <Avatar sx={{ backgroundColor: 'red' }}>
-              <FavoriteIcon />
-            </Avatar>
-          ) : null
+          movie.favorite
+            ? (
+              <Avatar sx={{ backgroundColor: 'red' }}>
+                <FavoriteIcon />
+              </Avatar>
+            )
+            : null
         }
         title={
           <Typography variant="h5" component="p">
@@ -115,25 +61,25 @@ export default function MovieCard({ movie, action }) {
         }
       />
 
-      <CardContent sx={{paddingTop: 0.5}}>
+      <CardContent sx={{ paddingTop: 0.5 }}>
         <Grid container>
           <Grid size={{ xs: 12 }}>
             <Typography variant="h7" component="p">
-              <CalendarIcon fontSize="small" sx={{marginRight: 2}}/>
+              <CalendarIcon fontSize="small" sx={{ marginRight: 2 }} />
               {movie.release_date}
             </Typography>
           </Grid>
 
           <Grid size={{ xs: 12 }}>
             <Typography variant="h7" component="p">
-              <StarRateIcon fontSize="small" sx={{marginRight: 2}}/>
+              <StarRateIcon fontSize="small" sx={{ marginRight: 2 }} />
               {movie.vote_average}
             </Typography>
           </Grid>
         </Grid>
       </CardContent>
 
-      <CardActions disableSpacing sx={{paddingTop: 0}}>
+      <CardActions disableSpacing sx={{ paddingTop: 0 }}>
         {action(movie)}
         <Link to={`/movies/${movie.id}`}>
           <Button variant="outlined" size="medium" color="primary">

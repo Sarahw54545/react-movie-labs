@@ -28,7 +28,6 @@ const HomePage = (props) => {
     </>
   );
 
-
   return (
     <PageTemplate
       title={title}

@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import HeroBanner from "../heroBanner";
 import MovieList from "../movieList";
 import Grid from "@mui/material/Grid2";
+import EmptyPrompt from "../emptyPrompt"
 // import Header from "../headerMovieList";
 // import FilterCard from "../filterMoviesCard";          - No Longer Used (Replaced by Hero Banner)
 
-function MovieListPageTemplate({ movies, title, action, searchPrompt }) {
+function MovieListPageTemplate({ movies, title, action, searchPrompt, isEmpty, emptyPrompt, buttonPrompt, link }) {
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const genreId = Number(genreFilter);
@@ -49,8 +50,11 @@ function MovieListPageTemplate({ movies, title, action, searchPrompt }) {
         </Grid> */}
       {/* </Grid> */}
 
-      <MovieList action={action} movies={displayedMovies}></MovieList>
-    </Grid>
+      {isEmpty === true
+      ? <EmptyPrompt emptyPrompt={emptyPrompt} buttonPrompt={buttonPrompt} link={link}></EmptyPrompt>
+    : <MovieList action={action} movies={displayedMovies}></MovieList>
+    }
+    </Grid >
   );
 }
 export default MovieListPageTemplate;

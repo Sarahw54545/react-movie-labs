@@ -32,7 +32,7 @@ const TemplateMoviePage = ({ movie, children }) => {
         <Grid size={{ xs: 3 }}>
           <ImageList
             sx={{
-              height: "150vh",
+              height: "110vh",
             }}
             cols={1}
           >

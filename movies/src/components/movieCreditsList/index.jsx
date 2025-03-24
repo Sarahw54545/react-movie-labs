@@ -2,6 +2,7 @@ import React from "react";
 import { getCredits } from "../../api/tmdb-api";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from '../spinner'
+import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import placeholder from '../../images/actorPlaceholder.png'
@@ -44,5 +45,10 @@ export default function MovieCreditList({ movie }) {
       />
     </ImageListItem>
   ));
-  return castCards;
+
+  return (
+    <ImageList cols={cast.length} gap={10} sx={{ width: 1100 }}>
+      {castCards}
+    </ImageList>
+  );
 };

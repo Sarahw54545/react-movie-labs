@@ -82,9 +82,7 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
         <b>Movie Cast</b>
       </Typography>
 
-      <ImageList cols={100} gap={10} sx={{ width: 1100 }}>
         <MovieCreditList movie={movie}></MovieCreditList>
-      </ImageList>
 
       <Fab
         color="secondary"

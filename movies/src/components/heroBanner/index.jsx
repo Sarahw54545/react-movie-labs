@@ -9,6 +9,7 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import Typography from "@mui/material/Typography";
 
 const formControl =
 {
@@ -64,7 +65,7 @@ export default function heroBanner(props) {
                 }
             }>
 
-                <h1 style={{ color: "white", textShadow: "2px 4px 4px rgb(46 91 173 / 0.6)" }}>{props.title}</h1>
+                <Typography variant="h4" component="h1" sx={{ color: "white", textShadow: "2px 4px 4px rgb(46 91 173 / 0.6)", margin: 2, fontWeight: "bold" }}>{props.title}</Typography>
                 <Container sx={{
                     paddingBottom: 3,
                 }}>

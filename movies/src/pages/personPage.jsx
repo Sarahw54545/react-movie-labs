@@ -1,6 +1,5 @@
 import React from "react";
 import { useParams } from 'react-router';
-import PersonDetails from "../components/movieDetails/";
 import PageTemplate from "../components/templatePersonPage";
 import { getPerson } from '../api/tmdb-api'
 import { useQuery } from '@tanstack/react-query';
@@ -30,7 +29,6 @@ const PersonPage = () => {
         ? (
           <>
             <PageTemplate person={person}>
-              <PersonDetails person={person} />
             </PageTemplate>
           </>
         )

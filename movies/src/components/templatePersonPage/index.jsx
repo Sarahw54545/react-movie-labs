@@ -63,7 +63,7 @@ const TemplatePersonPage = ({ person }) => {
 
                         <CardContent sx={{ paddingTop: 0.5 }}>
                             <Grid container>
-
+                                
                                 <Grid size={{ xs: 12 }} sx={{ marginBottom: 1 }}>
                                     <Typography variant="h7" component="h4">
                                         Gender

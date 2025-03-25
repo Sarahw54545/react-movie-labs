@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 import { getCredits } from "../../api/tmdb-api";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from '../spinner'
@@ -23,26 +24,27 @@ export default function MovieCreditList({ movie }) {
   }
 
   const cast = data.cast;
-
-  console.log(cast)
+  // console.log(cast)
 
   let castCards = cast.map((c) => (
     <ImageListItem key={c.cast_id}>
-      <img
-        style={{ objectFit: "cover", width: 200 }}
-        src={
-          c.profile_path
-            ? `https://image.tmdb.org/t/p/w500/${c.profile_path}`
-            : placeholder
-        }
-        alt={c.name}
-        loading="lazy"
-      />
-      <ImageListItemBar
-        title={c.name}
-        subtitle={<span>{c.character}</span>}
-        position="below"
-      />
+      <Link style={{textDecoration: "none", color: "black"}} to={`/person/${c.id}`}>
+        <img
+          style={{ objectFit: "cover", width: 200 }}
+          src={
+            c.profile_path
+              ? `https://image.tmdb.org/t/p/w500/${c.profile_path}`
+              : placeholder
+          }
+          alt={c.name}
+          loading="lazy"
+        />
+        <ImageListItemBar
+          title={c.name}
+          subtitle={<span>{c.character}</span>}
+          position="below"
+        />
+      </Link>
     </ImageListItem>
   ));
 

@@ -28,7 +28,7 @@ export default function MovieCreditList({ movie }) {
 
   let castCards = cast.map((c) => (
     <ImageListItem key={c.cast_id}>
-      <Link style={{textDecoration: "none", color: "black"}} to={`/person/${c.id}`}>
+      <Link style={{textDecoration: "none", color: "black"}} to={`/people/${c.id}`}>
         <img
           style={{ objectFit: "cover", width: 200 }}
           src={

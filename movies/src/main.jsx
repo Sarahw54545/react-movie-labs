@@ -8,12 +8,13 @@ import NowPlayingPage from "./pages/nowPlayingPage";
 import UpcomingMoviesPage from "./pages/upcomingMoviesPage";
 import WatchlistPage from "./pages/watchlistPage";
 import MovieReviewPage from "./pages/movieReviewPage";
-import PersonPage from "./pages/personPage"
-import SiteHeader from './components/siteHeader'
+import PersonPage from "./pages/personPage";
+import PopularPeoplePage from "./pages/popularPeople"
+import SiteHeader from './components/siteHeader';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import MoviesContextProvider from "./contexts/moviesContext";
-import AddMovieReviewPage from './pages/addMovieReviewPage'
+import AddMovieReviewPage from './pages/addMovieReviewPage';
 import CssBaseline from '@mui/material/CssBaseline'; // Updates the body and html element to provide better page wide defaults (margins in browsers removed)
 
 const queryClient = new QueryClient({
@@ -43,7 +44,8 @@ const App = () => {
             <Route path="/movies/:id" element={<MoviePage />} />
             <Route path="*" element={<Navigate to="/" />} />
             <Route path="/reviews/form" element={<AddMovieReviewPage />} />
-            <Route path="/person/:id" element={<PersonPage />} />
+            <Route path="/people/:id" element={<PersonPage />} />
+            <Route path="/people/popular" element={<PopularPeoplePage />} />
           </Routes>
         </MoviesContextProvider>
       </BrowserRouter>

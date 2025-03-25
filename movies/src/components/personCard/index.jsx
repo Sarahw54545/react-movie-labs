@@ -35,7 +35,7 @@ export default function MovieCard({ person }) {
             <CardContent sx={{ paddingTop: 0.5 }}>
                 <Grid container>
                     <Link to={`/people/${person.id}`}>
-                        <Button variant="outlined" size="medium" color="primary">
+                        <Button variant="contained" size="medium" color="primary">
                             More Info...
                         </Button>
                     </Link>

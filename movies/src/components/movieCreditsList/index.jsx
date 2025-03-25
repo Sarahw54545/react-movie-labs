@@ -49,7 +49,7 @@ export default function MovieCreditList({ movie }) {
   ));
 
   return (
-    <ImageList cols={cast.length} gap={10} sx={{ width: 1100 }}>
+    <ImageList cols={cast.length} gap={10} sx={{ width: "100%" }}>
       {castCards}
     </ImageList>
   );

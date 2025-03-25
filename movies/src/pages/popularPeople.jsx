@@ -26,9 +26,6 @@ const PopPeoplePage = () => {
       title="Popular Actors"
       searchPrompt="Actors"
       people={people}
-    //   action={(movie) => {
-    //     return <AddToFavoritesIcon movie={movie} />
-    //   }}
     />
   );
 };

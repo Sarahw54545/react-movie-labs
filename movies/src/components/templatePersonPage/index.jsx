@@ -10,6 +10,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import img from '../../images/actorPlaceholder.png'
 import Button from "@mui/material/Button";
+import PersonCreditList from "../personsCreditList"
 
 const TemplatePersonPage = ({ person }) => {
 
@@ -24,8 +25,8 @@ const TemplatePersonPage = ({ person }) => {
                     : null
 
     const imdbCheck = person.imdb_id
-        ?   <Grid size={{ xs: 12 }}>
-            <Typography variant="h7" component="h4" sx={{marginBottom: 1}}>
+        ? <Grid size={{ xs: 12 }}>
+            <Typography variant="h7" component="h4" sx={{ marginBottom: 1 }}>
                 IMDB Link
             </Typography>
             <Link to={`https://www.imdb.com/name/${person.imdb_id}`}>
@@ -63,7 +64,7 @@ const TemplatePersonPage = ({ person }) => {
 
                         <CardContent sx={{ paddingTop: 0.5 }}>
                             <Grid container>
-                                
+
                                 <Grid size={{ xs: 12 }} sx={{ marginBottom: 1 }}>
                                     <Typography variant="h7" component="h4">
                                         Gender
@@ -112,6 +113,12 @@ const TemplatePersonPage = ({ person }) => {
                         <Typography variant="h7" component="p" sx={{ marginBottom: 3 }}>
                             {person.biography}
                         </Typography>
+
+                        <Typography variant="h5" component="h3">
+                            <b>Movie Roles</b>
+                        </Typography>
+
+                        <PersonCreditList person={person}></PersonCreditList>
                     </Container>
                 </Grid>
             </Grid>

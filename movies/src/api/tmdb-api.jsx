@@ -1,6 +1,6 @@
-export const getMovies = () => {
+export const getMovies = (pageNo) => {
   return fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
+    `https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_KEY}&page=${pageNo}`
   ).then((response) => {
     if (!response.ok) {
       return response.json().then((error) => {
@@ -86,7 +86,7 @@ export const getMovieReviews = ({ queryKey }) => {
 
 export const getUpcomingMovies = () => {
   return fetch(
-    `https://api.themoviedb.org/3/movie/upcoming?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=1`
+    `https://api.themoviedb.org/3/movie/upcoming?api_key=${import.meta.env.VITE_TMDB_KEY}&page=1`
   ).then((response) => {
     if (!response.ok) {
       return response.json().then((error) => {
@@ -120,7 +120,7 @@ export const getCredits = (args) => {
 
 export const getNowPlaying = () => {
   return fetch(
-    `https://api.themoviedb.org/3/movie/now_playing?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
+    `https://api.themoviedb.org/3/movie/now_playing?api_key=${import.meta.env.VITE_TMDB_KEY}&page=1`
   ).then((response) => {
     if (!response.ok) {
       return response.json().then((error) => {
@@ -155,7 +155,7 @@ export const getPerson = (args) => {
 
 export const getPopPeople = () => {
   return fetch(
-    `https://api.themoviedb.org/3/person/popular?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
+    `https://api.themoviedb.org/3/person/popular?api_key=${import.meta.env.VITE_TMDB_KEY}&page=1`
   ).then((response) => {
     if (!response.ok) {
       return response.json().then((error) => {

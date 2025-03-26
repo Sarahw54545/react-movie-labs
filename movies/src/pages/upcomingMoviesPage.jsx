@@ -1,16 +1,24 @@
-import React from "react";
+import React, {useState} from "react";
 import { getUpcomingMovies } from "../api/tmdb-api";
 import PageTemplate from '../components/templateMovieListPage';
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '../components/spinner';
 import PlaylistAddIcon from '../components/cardIcons/addToWatchlist';
 import RemoveFromWatchlist from "../components/cardIcons/removeFromWatchlist";
+import Pagination from '@mui/material/Pagination';
+import Container from '@mui/material/Container';
 
-const UpcomingMoviesPage = (props) => {
+const UpcomingMoviesPage = () => {
+
+    const [currentPage, setPage] = useState(1);
+    const handleNavChange = (event, value) => {
+      setPage(value);
+    };
 
   const { data, error, isPending, isError } = useQuery({
-    queryKey: ['discoverUpcomingMovies'],
-    queryFn: getUpcomingMovies,
+    queryKey: ['discoverUpcomingMovies', currentPage],
+    queryFn: () => getUpcomingMovies(currentPage),
+    enabled: !!currentPage
   })
 
   if (isPending) {
@@ -23,7 +31,14 @@ const UpcomingMoviesPage = (props) => {
 
   const movies = data.results;
 
+  let totalPages = data.total_pages
+
+  totalPages>500
+  ? totalPages=500
+  : null
+
   return (
+    <>
     <PageTemplate
       title="Upcoming Movies"
       searchPrompt="Upcoming Movies..."
@@ -42,6 +57,10 @@ const UpcomingMoviesPage = (props) => {
         );
       }}
     />
+    <Container sx={{paddingBottom: 3, paddingTop: 1, justifyItems: "center"}}>
+    <Pagination count={totalPages} color="primary" size="large" page={currentPage} onChange={handleNavChange} />
+    </Container>
+    </>
   );
 };
 export default UpcomingMoviesPage;

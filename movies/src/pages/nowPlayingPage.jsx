@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { getNowPlaying } from "../api/tmdb-api";
 import PageTemplate from '../components/templateMovieListPage';
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '../components/spinner';
 import PlaylistAddIcon from '../components/cardIcons/addToWatchlist';
 import RemoveFromWatchlist from "../components/cardIcons/removeFromWatchlist";
+import Pagination from '@mui/material/Pagination';
+import Container from '@mui/material/Container';
 
-const NowPlayingPage = (props) => {
+const NowPlayingPage = () => {
+
+    const [currentPage, setPage] = useState(1);
+    const handleNavChange = (event, value) => {
+        setPage(value);
+    };
 
     const { data, error, isPending, isError } = useQuery({
-        queryKey: ['nowPlaying'],
-        queryFn: getNowPlaying,
+        queryKey: ['nowPlaying', currentPage],
+        queryFn: () => getNowPlaying(currentPage),
+        enabled: !!currentPage
     })
 
     if (isPending) {
@@ -23,25 +31,36 @@ const NowPlayingPage = (props) => {
 
     const movies = data.results;
 
+    let totalPages = data.total_pages
+
+    totalPages > 500
+        ? totalPages = 500
+        : null
+
     return (
-        <PageTemplate
-            title="In Cinemas Now"
-            searchPrompt="Movies..."
-            movies={movies}
-            action={(movie) => {
-                return (
-                    <>
-                        {
-                            movie.watchlist == true
-                                ? (
-                                    <RemoveFromWatchlist movie={movie} />
-                                )
-                                : <PlaylistAddIcon movie={movie} />
-                        }
-                    </>
-                );
-            }}
-        />
+        <>
+            <PageTemplate
+                title="In Cinemas Now"
+                searchPrompt="Movies..."
+                movies={movies}
+                action={(movie) => {
+                    return (
+                        <>
+                            {
+                                movie.watchlist == true
+                                    ? (
+                                        <RemoveFromWatchlist movie={movie} />
+                                    )
+                                    : <PlaylistAddIcon movie={movie} />
+                            }
+                        </>
+                    );
+                }}
+            />
+            <Container sx={{ paddingBottom: 3, paddingTop: 1, justifyItems: "center" }}>
+                <Pagination count={totalPages} color="primary" size="large" page={currentPage} onChange={handleNavChange} />
+            </Container>
+        </>
     );
 };
 export default NowPlayingPage;
